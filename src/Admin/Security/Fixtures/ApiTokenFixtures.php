@@ -1,14 +1,16 @@
 <?php
 
-namespace Kms\Core\Security\Fixtures;
+namespace Kms\Admin\Security\Fixtures;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use Kms\Core\Security\Entity\ApiToken;
 use Kms\Core\Secutiry\Entity\Permission;
+use Kms\Core\Shared\Constant\FixturesConstant;
 
-class ApiTokenFixtures extends Fixture implements DependentFixtureInterface
+class ApiTokenFixtures extends Fixture implements DependentFixtureInterface, FixtureGroupInterface
 {
     public function load(ObjectManager $manager): void
     {
@@ -29,6 +31,13 @@ class ApiTokenFixtures extends Fixture implements DependentFixtureInterface
     {
         return [
             PermissionFixtures::class,
+        ];
+    }
+
+    public static function getGroups(): array
+    {
+        return [
+            FixturesConstant::KMS_DEMO
         ];
     }
 }

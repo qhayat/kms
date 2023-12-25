@@ -1,12 +1,14 @@
 <?php
 
-namespace Kms\Core\Security\Fixtures;
+namespace Kms\Admin\Security\Fixtures;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
 use Doctrine\Persistence\ObjectManager;
 use Kms\Core\Secutiry\Entity\Permission;
+use Kms\Core\Shared\Constant\FixturesConstant;
 
-class PermissionFixtures extends Fixture
+class PermissionFixtures extends Fixture implements FixtureGroupInterface
 {
     public function load(ObjectManager $manager): void
     {
@@ -21,5 +23,13 @@ class PermissionFixtures extends Fixture
         $manager->persist($pageReadPermission);
         $manager->persist($postReadPermission);
         $manager->flush();
+    }
+
+    public static function getGroups(): array
+    {
+        return [
+            FixturesConstant::KMS_DEMO,
+            FixturesConstant::KMS_STRICTLY_NECESSARY,
+        ];
     }
 }

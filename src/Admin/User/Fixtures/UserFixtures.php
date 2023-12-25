@@ -45,6 +45,9 @@ class UserFixtures extends Fixture implements FixtureGroupInterface
 
     public static function getGroups(): array
     {
-        return FixturesConstant::GROUPS;
+        return [
+            FixturesConstant::KMS_DEMO,
+            FixturesConstant::KMS_STRICTLY_NECESSARY,
+        ];
     }
 }

@@ -7,7 +7,18 @@ To install this bundle, execute the following command via Composer:
 composer require qamar/kms
 ```
 
-## Configuration des routes
+## Database
+To create the database tables, run the following command:
+```bash
+php bin/console doctrine:migrations:migrate
+```
+
+To load the initial data fixtures, run the following command:
+```bash
+php bin/console doctrine:fixtures:load --group=kms /*--append*/
+```
+
+## Routes Configuration
 Add the following route configurations to your Symfony project's routes.yaml file to integrate the bundle's functionalities:
 ```yaml
 _kms_bundle:

@@ -38,6 +38,8 @@ class MenuFixtures extends Fixture implements FixtureGroupInterface
 
     public static function getGroups(): array
     {
-        return FixturesConstant::GROUPS;
+        return [
+            FixturesConstant::KMS_DEMO
+        ];
     }
 }

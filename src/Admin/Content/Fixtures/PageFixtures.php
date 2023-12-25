@@ -83,6 +83,8 @@ class PageFixtures extends Fixture implements DependentFixtureInterface, Fixture
 
     public static function getGroups(): array
     {
-        return FixturesConstant::GROUPS;
+        return [
+            FixturesConstant::KMS_DEMO
+        ];
     }
 }
