@@ -1,0 +1,37 @@
+nelmio_api_doc:
+    areas:
+      default:
+        path_patterns:
+          - '^/api(?!/(posts|pages)).*$'
+
+    documentation:
+        info:
+            title: KMS API
+            description: KMS API documentation
+            version: 1.0.0
+        paths:
+            /api/posts/{slug}:
+                get:
+                    tags:
+                        - Post
+                    summary: Get a post by slug
+                    operationId: getPostBySlug
+                    parameters:
+                        - name: slug
+                          in: path
+                          required: true
+                          schema:
+                              type: string
+
+            /api/pages/{slug}:
+                get:
+                    tags:
+                        - Page
+                    summary: Get a page by slug
+                    operationId: getPageBySlug
+                    parameters:
+                        - name: slug
+                          in: path
+                          required: true
+                          schema:
+                              type: string

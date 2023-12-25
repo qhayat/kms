@@ -1,0 +1,12 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    kms.cache:
+      class: Symfony\Component\Cache\Adapter\TagAwareAdapter
+      arguments: [ '@kms.cache.file', '@kms.cache.file' ]
+
+    Symfony\Component\Cache\Adapter\TagAwareAdapterInterface $kmsCache: '@kms.cache'
+    Kms\Core\Shared\Cache\Invalidator\CacheInvalidatorInterface $contentCacheInvalidator: '@Kms\Core\Shared\Cache\Invalidator\ContentCacheInvalidator'
+    Kms\Core\Shared\Cache\Invalidator\CacheInvalidatorInterface $menuCacheInvalidator: '@Kms\Core\Shared\Cache\Invalidator\MenuCacheInvalidator'

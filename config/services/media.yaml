@@ -1,0 +1,32 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    kms.media_uploader.local_adapter:
+      class: League\Flysystem\Local\LocalFilesystemAdapter
+      arguments:
+        $location: '%kms.media_upload_dir%'
+
+    Kms\Admin\Media\Uploader\Uploader:
+      arguments:
+        $adapter: '@kms.media_uploader.local_adapter'
+        $kmsMediaBaseUrl: '%kms.media_base_url%'
+
+    Kms\Admin\Media\Builder\FinalUrlBuilder:
+      arguments:
+        $adapter: '@kms.media_uploader.local_adapter'
+
+    kms.media_uploader:
+      class: Kms\Admin\Media\Uploader\Uploader
+      arguments:
+        $adapter: '@kms.media_uploader.local_adapter'
+        $kmsMediaBaseUrl: '%kms.media_base_url%'
+
+    kms.media.final_url_builder:
+      class: Kms\Admin\Media\Builder\FinalUrlBuilder
+      arguments:
+        $adapter: '@kms.media_uploader.local_adapter'
+
+    Kms\Admin\Media\Uploader\UploaderInterface $kmsUploader: '@kms.media_uploader'
+    Kms\Admin\Media\Builder\FinalUrlBuilder $kmsMediaFinalUrlBuilder: '@kms.media.final_url_builder'

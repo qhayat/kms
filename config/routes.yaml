@@ -1,0 +1,33 @@
+kms_admin:
+  path: /admin
+  controller: Kms\Admin\Dashboard\Controller\DashboardController::index
+
+kms_login:
+  path: /login
+  controller: Kms\Admin\Security\Controller\LoginController
+
+kms_logout:
+  path: /logout
+  controller: Kms\Admin\Security\Security\LogoutController
+
+kms_home:
+    path: /
+    controller: Kms\Website\Content\Controller\ShowController
+
+kms_page:
+  path: /{slug}
+  controller: Kms\Website\Content\Controller\ShowController
+
+kms_post:
+  path: /posts/{slug}
+  controller: Kms\Website\Content\Controller\ShowController
+
+kms_setting:
+    path: /admin/settings
+    controller: Kms\Admin\Setting\Controller\IndexController
+
+kms_setting_cache:
+  path: /admin/settings/cache/{type}
+  controller: Kms\Admin\Setting\Controller\CacheController
+  defaults:
+    type: null

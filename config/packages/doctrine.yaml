@@ -1,0 +1,24 @@
+doctrine:
+    orm:
+        auto_generate_proxy_classes: true
+        enable_lazy_ghost_objects: true
+        report_fields_where_declared: true
+        validate_xml_mapping: true
+        naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
+        auto_mapping: true
+        mappings:
+          Kms\Admin:
+            is_bundle: false
+            dir: '%kms.root_dir%/src/Admin'
+            prefix: 'Kms\Admin'
+            alias: Kms\Admin
+          Kms\Api:
+            is_bundle: false
+            dir: '%kms.root_dir%/src/Api'
+            prefix: 'Kms\Api'
+            alias: Kms\Api
+          Kms\Core:
+            is_bundle: false
+            dir: '%kms.root_dir%/src/Core'
+            prefix: 'Kms\Core'
+            alias: Kms\Core

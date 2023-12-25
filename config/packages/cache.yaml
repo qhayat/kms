@@ -1,0 +1,6 @@
+framework:
+  cache:
+    pools:
+      kms.cache.file:
+        public: true
+        adapter: cache.adapter.filesystem

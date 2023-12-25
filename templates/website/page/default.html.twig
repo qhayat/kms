@@ -1,0 +1,34 @@
+{% extends "@Kms/website/base.html.twig" %}
+
+{% block meta %}
+    <title>{{ content.title }}</title>
+    <meta name="description" content="{{ content.excerpt|striptags }}">
+{% endblock %}
+
+{% block content %}
+<div class="bg-white py-24 sm:py-32">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+        <div class="mx-auto lg:mx-0">
+            <h2 class="text-3xl text-center font-bold tracking-tight text-gray-900 sm:text-4xl pb-5">{{ content.title }}</h2>
+            {% if content.featuredImageUrl is not empty %}
+                <div class="bg-fixed bg-no-repeat bg-top h-64" style="background-image: url({{ content.featuredImageUrl }}); background-size: 100% auto;"%}></div>
+            {% endif %}
+            <p class="mt-2 text-lg leading-8 text-gray-600">
+                {{ content.content |raw }}
+            </p>
+        </div>
+        {% if content.extra.isBlogPage is defined and content.extra.isBlogPage %}
+            {% include '@Kms/website/components/posts.html.twig' with {posts: content.relateds.data, totalItems: content.relateds.meta.totalItems, page: content.relateds.meta.page} %}
+        {% else %}
+            {% if content.relateds is not null and content.relateds is not empty %}
+                <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl mt-5">A voir aussi</h2>
+                <div class="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 border-t border-gray-200 sm:mt-5 sm:pt-10 lg:mx-0 lg:max-w-none lg:grid-cols-3">
+                    {% for content in content.relateds  %}
+                        {% include '@Kms/website/components/content/content.html.twig' with {content} %}
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

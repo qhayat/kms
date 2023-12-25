@@ -1,0 +1,64 @@
+{% extends '@EasyAdmin/page/content.html.twig' %}
+{% import '@Kms/admin/setting/cache/_invalidate_confirmation_modal.html.twig' as invalidate_confirmation_modal %}
+
+{% block content_title %}
+    <i class="fa fa-database"></i> {{ 'Cache'|trans }}
+{% endblock %}
+
+{% block page_content %}
+
+  <div class="row col-md-12">
+      <div class="col-md-6">
+          <br />
+          <br />
+          <button
+                  data-bs-toggle="modal"
+                  data-bs-target="#all_page_confirmation"
+                  class="btn btn-danger"
+          ><i class="fa fa-trash"></i> {{ 'Invalidate all page'|trans }}</button>
+
+          <br />
+          <br />
+          <button
+                  data-bs-toggle="modal"
+                  data-bs-target="#all_post_confirmation"
+                  class="btn btn-danger"
+                  class="btn btn-danger"
+          ><i class="fa fa-trash"></i> {{ 'Invalidate all post'|trans }}</button>
+
+          <br />
+          <br />
+          <button
+                  data-bs-toggle="modal"
+                  data-bs-target="#all_menu_confirmation"
+                  class="btn btn-danger"
+                  class="btn btn-danger"
+          ><i class="fa fa-trash"></i> {{ 'Invalidate all menu'|trans }}</button>
+      </div>
+  </div>
+
+    {{
+        invalidate_confirmation_modal.generate(
+            'page',
+            'all_page_confirmation',
+            'Are you sure you want to invalidate cache for all page ?'|trans,
+        )
+    }}
+
+    {{
+        invalidate_confirmation_modal.generate(
+            'post',
+            'all_post_confirmation',
+            'Are you sure you want to invalidate cache for all post ?'|trans,
+        )
+    }}
+
+    {{
+    invalidate_confirmation_modal.generate(
+        'menu',
+        'all_menu_confirmation',
+        'Are you sure you want to invalidate cache for all menu ?'|trans,
+    )
+    }}
+
+{% endblock %}

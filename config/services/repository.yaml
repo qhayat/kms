@@ -1,0 +1,7 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  Kms\Core\Content\Repository\ContentRepositoryInterface $pageRepository: '@Kms\Core\Content\Repository\PageRepository'
+  Kms\Core\Content\Repository\ContentRepositoryInterface $postRepository: '@Kms\Core\Content\Repository\PostRepository'

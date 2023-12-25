@@ -1,0 +1,4 @@
+doctrine_migrations:
+  migrations_paths:
+    'Kms\Migrations': '%kms.root_dir%/src/Migrations'
+  enable_profiler: false

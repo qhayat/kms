@@ -1,0 +1,29 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    bind:
+      $projectDir: '%kernel.project_dir%'
+      $kmsMediaBaseUrl: '%kms.media_base_url%'
+  _instanceof:
+    Kms\Core\ObjectView\BuilderInterface:
+      tags: ['kms.object_view_builder']
+
+  Kms\:
+    resource: '../src/*'
+    exclude: '../src/{DependencyInjection,Entity,Migrations,Tests}'
+
+  Kms\Core\Http\QueryParser\PageQueryParser:
+    arguments:
+      $defaultPageSize: 10
+
+  Kms\Core\ObjectView\Builder:
+    arguments:
+      $builders: !tagged_iterator kms.object_view_builder
+
+  kms.post.filterQueryParser:
+    class: Kms\Core\Http\QueryParser\FilterQueryParser
+    arguments:
+      $allowedParams: ['title']
+
+  Kms\Core\Http\QueryParser\FilterQueryParser $postFiltersQueryParser: '@kms.post.filterQueryParser'

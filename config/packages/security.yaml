@@ -1,0 +1,29 @@
+security:
+  password_hashers:
+    Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
+  providers:
+    kms_user_provider:
+      entity:
+        class: Kms\Entity\User
+        property: email
+  firewalls:
+    dev:
+      pattern: ^/(_(profiler|wdt)|css|images|js)/
+      security: false
+
+    main:
+      lazy: true
+      provider: kms_user_provider
+      form_login:
+        login_path: kms_login
+        check_path: kms_login
+        enable_csrf: true
+        default_target_path: /admin
+      logout:
+        path: kms_logout
+        target: kms_login
+
+  # Easy way to control access for large sections of your site
+  # Note: Only the *first* access control that matches will be used
+  access_control:
+    - { path: ^/admin,       roles: IS_AUTHENTICATED_FULLY }

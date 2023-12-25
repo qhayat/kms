@@ -1,0 +1,12 @@
+kms.api.swagger_ui:
+  path: /api/docs
+  methods: GET
+  defaults: { _controller: nelmio_api_doc.controller.swagger_ui }
+
+kms_api_post_get_by_slug:
+  path: /api/posts/{slug}
+  controller: Kms\Api\Content\Controller\GetController
+
+kms_api_page_get_by_slug:
+  path: /api/pages/{slug}
+  controller: Kms\Api\Content\Controller\GetController

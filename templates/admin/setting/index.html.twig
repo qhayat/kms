@@ -1,0 +1,33 @@
+{% extends '@EasyAdmin/page/content.html.twig' %}
+
+{% block content_title %}
+   {{ 'General'|trans }}
+{% endblock %}
+
+{% block page_content %}
+    {% if settings['site_logo'] is defined and settings['site_logo'] is not empty %}
+        <img src="{{ settings['site_logo'] }}"  style="max-width: 200px;"/>
+    {% endif %}
+
+    {{ form_start(form) }}
+        <div class="page-actions" style="text-align: right;">
+            <button class="action-saveAndReturn btn btn-primary action-save" type="submit" for="#setting_form">
+                <span class="btn-label"><span class="action-label">{{ 'Save'|trans }}</span></span>
+            </button>
+        </div>
+
+        {%  for f in form %}
+            {% if f.vars.name != '_token' %}
+                <div class=col-md-6" >
+                    <div class="field-text form-group">
+                        <div class="form-widget">
+                            {{ form_row(f, {
+                                value: settings[f.vars.name] ?? '',
+                            }) }}
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    {{ form_end(form) }}
+{% endblock %}

@@ -1,0 +1,38 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  Kms\Admin\Content\Controller\:
+    resource: '../src/Admin/Content/Controller'
+    tags: ['controller.service_arguments', 'container.service_subscriber']
+    calls:
+      - [setContainer, ['@Psr\Container\ContainerInterface']]
+
+  Kms\Admin\Dashboard\Controller\:
+    resource: '../src/Admin/Dashboard/Controller'
+    tags: [ 'controller.service_arguments', 'container.service_subscriber' ]
+    calls:
+      - [ setContainer, [ '@Psr\Container\ContainerInterface' ] ]
+
+  Kms\Admin\Menu\Controller\:
+    resource: '../src/Admin/Menu/Controller'
+    tags: [ 'controller.service_arguments', 'container.service_subscriber' ]
+    calls:
+      - [ setContainer, [ '@Psr\Container\ContainerInterface' ] ]
+
+  Kms\Website\Content\Controller\:
+    resource: '../src/Website/Content/Controller'
+    tags: [ 'controller.service_arguments', 'container.service_subscriber' ]
+    calls:
+      - [ setContainer, [ '@Psr\Container\ContainerInterface' ] ]
+
+  Kms\Admin\Content\Controller\PageCrudController:
+    tags: [ 'controller.service_arguments', 'container.service_subscriber' ]
+    calls:
+      - [ setContainer, [ '@Psr\Container\ContainerInterface' ] ]
+
+  Kms\Admin\Content\Controller\PostCrudController:
+    tags: [ 'controller.service_arguments', 'container.service_subscriber' ]
+    calls:
+      - [ setContainer, [ '@Psr\Container\ContainerInterface' ] ]
