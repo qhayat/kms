@@ -6,33 +6,27 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
-use Kms\Admin\Content\Fixtures\PageFixtures;
 use Kms\Admin\Setting\Entity\Setting;
 use Kms\Admin\User\Entity\User;
 use Kms\Admin\User\Fixtures\UserFixtures;
-use Kms\Core\Content\Entity\Page;
 use Kms\Core\Shared\Constant\FixturesConstant;
 
 class SettingFixtures extends Fixture implements DependentFixtureInterface, FixtureGroupInterface
 {
     public function load(ObjectManager $manager): void
     {
-        $pageRepository = $manager->getRepository(Page::class);
         $userRepository = $manager->getRepository(User::class);
-
-        $homePage = $pageRepository->findOneBy(['homePage' => true]);
-        $blogPage = $pageRepository->findOneBy(['blogPage' => true]);
         $author = $userRepository->findOneBy(['email' => 'j.doe@example.local']);
 
         $homePageSetting = (new Setting())
             ->setKey('home_page')
-            ->setValue($homePage->getId())
+            ->setValue(null)
             ->setAuthor($author);
         $manager->persist($homePageSetting);
 
         $blogPageSetting = (new Setting())
             ->setKey('blog_page')
-            ->setValue($blogPage->getId())
+            ->setValue(null)
             ->setAuthor($author);
         $manager->persist($blogPageSetting);
 
@@ -54,7 +48,6 @@ class SettingFixtures extends Fixture implements DependentFixtureInterface, Fixt
     public function getDependencies(): array
     {
         return [
-            PageFixtures::class,
             UserFixtures::class,
         ];
     }
@@ -62,7 +55,6 @@ class SettingFixtures extends Fixture implements DependentFixtureInterface, Fixt
     public static function getGroups(): array
     {
         return [
-            FixturesConstant::KMS_DEMO,
             FixturesConstant::KMS_STRICTLY_NECESSARY,
         ];
     }
